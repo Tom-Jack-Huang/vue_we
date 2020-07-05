@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: vue-we
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+  freemarker:
+    suffix: .html
+    template-loader-path: classpath:/templates/
+app:
+  version: V5.0
+  appVersion : 5
+
+
+com:
+  zipkin:
+    serviceName: server-server
+    url: http://127.0.0.1:9411
+    connectTimeout: 6000
+    readTimeout: 6000
+    flushInterval: 1
+    compressionEnabled: true
+
+file:
+  maxUploadSize: 10485760
+multipart:
+  maxFileSize: 100Mb
+  maxRequestSize: 1000Mb
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 5000 #缺省为10
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 100000 #缺省为1000
+  config:
+      stream:
+        maxConcurrentConnections: 50
+
+
+feign:
+  httpclient:
+    enabled:  false
+  eureka:
+    enabled: true
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 100000
+  ConnectTimeout: 30000
