@@ -6,9 +6,9 @@ spring:
       fail-on-empty-beans: false
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
-  freemarker:
+  thymeleaf:
     suffix: .html
-    template-loader-path: classpath:/templates/
+    prefix: classpath:/templates/
 app:
   version: V5.0
   appVersion : 5
