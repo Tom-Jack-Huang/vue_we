@@ -7,12 +7,14 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
+file-save-path: /www/ftpServer/file/
+
 server:
   port: ${port:8083}
   max-http-header-size: 102400
 
 app:
-  base: http://192.168.31.1:8083
+  base: http://127.0.0.1:8083
 
 logging:
   level:

@@ -1,6 +1,7 @@
 package com.hl.vuewe.controller;
 
 import com.hl.vuewe.utils.FtpUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
 
 
 /**
@@ -18,10 +24,15 @@ import java.util.HashMap;
 @RequestMapping("file")
 public class FileServerController {
 
+    @Value("${file-save-path}")
+    private String fileSavePath;
 
-    @PostMapping("uploadFile")
+    @Value("${app.base}")
+    private String baseUrl;
+
+    @PostMapping("uploadFileToFtp")
     @ResponseBody
-    private Object uploadFile(MultipartFile multipartFile,String fileName) throws Exception {
+    private Object uploadFileToFtp(MultipartFile multipartFile,String fileName) throws Exception {
         HashMap<String,Object> resultMap = new HashMap<String, Object>(16);
         resultMap.put("result",true);
         resultMap.put("msg","数据获取成功！");
@@ -39,9 +50,9 @@ public class FileServerController {
         return resultMap;
     }
 
-    @PostMapping("downloadFile")
+    @PostMapping("downloadFileFromFtp")
     @ResponseBody
-    private Object downLoadFile(String fileName) throws Exception {
+    private Object downloadFileFromFtp(String fileName) throws Exception {
         HashMap<String,Object> resultMap = new HashMap<String, Object>(16);
         resultMap.put("result",true);
         resultMap.put("msg","数据获取成功！");
@@ -59,11 +70,41 @@ public class FileServerController {
         }
         return resultMap;
     }
-    @GetMapping("show")
+
+    @PostMapping("uploadFile")
     @ResponseBody
-    private Object show(String fileName) throws Exception {
-        FtpUtils ftpUtils = new FtpUtils();
-        return ftpUtils.show(fileName);
+    private Object uploadFile(MultipartFile multipartFile) throws Exception {
+        HashMap<String,Object> resultMap = new HashMap<String, Object>(16);
+        resultMap.put("result",true);
+        resultMap.put("msg","数据获取成功！");
+        if (Objects.isNull(multipartFile)) {
+            resultMap.put("result",false);
+            resultMap.put("msg","文件为空");
+            return resultMap;
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        String uuid = UUID.randomUUID().toString().replace("-","");
+        String time = simpleDateFormat.format(new Date());
+        try {
+            File file = new File(fileSavePath);
+            if (!file.exists()) {
+               boolean isOk = file.mkdir();
+            }
+            //后缀
+            String suffix = Objects.requireNonNull(multipartFile.getOriginalFilename()).substring(multipartFile.getOriginalFilename().lastIndexOf("."));
+            String fileName = uuid+time+suffix;
+            resultMap.put("fileName",fileName);
+            File createFile = new File(fileSavePath+fileName);
+            multipartFile.transferTo(createFile);
+            String url = baseUrl+"/file/"+fileName;
+            resultMap.put("filePath",url);
+        } catch (Exception e) {
+            System.out.println(e);
+            resultMap.put("result",false);
+            resultMap.put("msg","文件上传失败");
+            return resultMap;
+        }
+        return resultMap;
     }
 
 }
