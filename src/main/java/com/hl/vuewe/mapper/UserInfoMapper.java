@@ -2,6 +2,8 @@ package com.hl.vuewe.mapper;
 
 import com.hl.vuewe.entity.UserInfo;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -86,4 +88,17 @@ public interface UserInfoMapper {
      * @return int
      */
     int batchInsert(@Param("list") List<UserInfo> list);
+    /**
+     * selectInfoFromUseName
+     * @param map map
+     * @return UserInfo
+     */
+    UserInfo selectInfoFromUseName(Map<String,Object> map);
+
+    /**
+     * selectInfoFromEmail
+     * @param map map
+     * @return UserInfo
+     */
+    UserInfo selectInfoFromEmail(Map<String,Object> map);
 }

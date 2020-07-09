@@ -1,7 +1,11 @@
 package com.hl.vuewe.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.hl.vuewe.entity.UserInfo;
+import org.apache.commons.lang3.StringUtils;
+
 public interface UserInfoService{
 
     /**
@@ -71,4 +75,17 @@ public interface UserInfoService{
      */
     int batchInsert(List<UserInfo> list);
 
+    /**
+     * selectInfoFromUseName
+     * @param map map
+     * @return UserInfo
+     */
+    UserInfo selectInfoFromUseName(Map<String,Object> map);
+
+    /**
+     * selectInfoFromEmail
+     * @param map map
+     * @return UserInfo
+     */
+    UserInfo selectInfoFromEmail(Map<String,Object> map);
 }

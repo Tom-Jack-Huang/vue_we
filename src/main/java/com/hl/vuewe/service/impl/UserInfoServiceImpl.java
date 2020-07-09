@@ -2,7 +2,10 @@ package com.hl.vuewe.service.impl;
 
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.hl.vuewe.mapper.UserInfoMapper;
 import com.hl.vuewe.entity.UserInfo;
 import com.hl.vuewe.service.UserInfoService;
@@ -67,4 +70,13 @@ public class UserInfoServiceImpl implements UserInfoService{
         return userInfoMapper.batchInsert(list);
     }
 
+    @Override
+    public UserInfo selectInfoFromUseName(Map<String,Object> map) {
+        return userInfoMapper.selectInfoFromUseName(map);
+    }
+
+    @Override
+    public UserInfo selectInfoFromEmail(Map<String, Object> map) {
+        return userInfoMapper.selectInfoFromEmail(map);
+    }
 }

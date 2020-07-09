@@ -1,6 +1,7 @@
 package com.hl.vuewe.controller;
 
 import com.hl.vuewe.utils.FtpUtils;
+import com.hl.vuewe.utils.HlUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,9 +34,7 @@ public class FileServerController {
     @PostMapping("uploadFileToFtp")
     @ResponseBody
     private Object uploadFileToFtp(MultipartFile multipartFile,String fileName) throws Exception {
-        HashMap<String,Object> resultMap = new HashMap<String, Object>(16);
-        resultMap.put("result",true);
-        resultMap.put("msg","数据获取成功！");
+        HashMap<String,Object> resultMap = HlUtil.handleHelpForMap();
       if (multipartFile != null) {
           FtpUtils ftpUtils = new FtpUtils();
           boolean isOk = ftpUtils.uploadFile("/vue",fileName,multipartFile.getInputStream());
@@ -53,9 +52,7 @@ public class FileServerController {
     @PostMapping("downloadFileFromFtp")
     @ResponseBody
     private Object downloadFileFromFtp(String fileName) throws Exception {
-        HashMap<String,Object> resultMap = new HashMap<String, Object>(16);
-        resultMap.put("result",true);
-        resultMap.put("msg","数据获取成功！");
+        HashMap<String,Object> resultMap = HlUtil.handleHelpForMap();
         if (fileName == null) {
             resultMap.put("result",false);
             resultMap.put("msg","请输入需要下载的文件");
@@ -74,9 +71,7 @@ public class FileServerController {
     @PostMapping("uploadFile")
     @ResponseBody
     private Object uploadFile(MultipartFile multipartFile) throws Exception {
-        HashMap<String,Object> resultMap = new HashMap<String, Object>(16);
-        resultMap.put("result",true);
-        resultMap.put("msg","数据获取成功！");
+        HashMap<String,Object> resultMap = HlUtil.handleHelpForMap();
         if (Objects.isNull(multipartFile)) {
             resultMap.put("result",false);
             resultMap.put("msg","文件为空");
