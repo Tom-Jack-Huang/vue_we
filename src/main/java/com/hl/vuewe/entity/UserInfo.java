@@ -1,39 +1,42 @@
 package com.hl.vuewe.entity;
 
 import java.io.Serializable;
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class UserInfo implements Serializable {
     /**
     * 用户ID
     */
-    private Integer id;
+    public Integer id;
 
     /**
     * 用户名
     */
-    private String userName;
+    public String userName;
 
     /**
     * 邮箱
     */
-    private String email;
+    public String email;
 
     /**
     * 手机号
     */
-    private String phone;
+    public String phone;
 
     /**
     * 密码
     */
-    private String password;
+    public String password;
 
     /**
     * qq号
     */
-    private String qq;
+    public String qq;
 
     private static final long serialVersionUID = 1L;
 }

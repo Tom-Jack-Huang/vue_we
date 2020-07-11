@@ -79,4 +79,14 @@ public class UserInfoServiceImpl implements UserInfoService{
     public UserInfo selectInfoFromEmail(Map<String, Object> map) {
         return userInfoMapper.selectInfoFromEmail(map);
     }
+
+    @Override
+    public UserInfo checkUserFromUserName(String userName) {
+        return userInfoMapper.checkUserFromUserName(userName);
+    }
+
+    @Override
+    public UserInfo checkUserFromEmail(String email) {
+        return userInfoMapper.checkUserFromEmail(email);
+    }
 }

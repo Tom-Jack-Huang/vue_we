@@ -88,4 +88,20 @@ public interface UserInfoService{
      * @return UserInfo
      */
     UserInfo selectInfoFromEmail(Map<String,Object> map);
+
+    /**
+     * checkUserFromUserName
+     * @param userName userName
+     * @return UserInfo
+     */
+    UserInfo checkUserFromUserName(String userName);
+
+    /**
+     * checkUserFromUserName
+     * @param email userName
+     * @return UserInfo
+     */
+    UserInfo checkUserFromEmail(String email);
+
+
 }

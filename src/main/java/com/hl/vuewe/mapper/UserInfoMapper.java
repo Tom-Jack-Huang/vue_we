@@ -101,4 +101,19 @@ public interface UserInfoMapper {
      * @return UserInfo
      */
     UserInfo selectInfoFromEmail(Map<String,Object> map);
+
+    /**
+     * checkUserFromUserName
+     * @param userName userName
+     * @return UserInfo
+     */
+    UserInfo checkUserFromUserName(String userName);
+
+    /**
+     * checkUserFromEmail
+     * @param email email
+     * @return UserInfo
+     */
+    UserInfo checkUserFromEmail(String email);
+
 }

@@ -35,7 +35,18 @@
     from user_info
     where email = #{email,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
-
+  <select id="checkUserFromUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  <select id="checkUserFromEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from user_info
