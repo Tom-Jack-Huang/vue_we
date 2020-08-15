@@ -15,6 +15,8 @@ server:
 
 app:
   base: http://127.0.0.1:8083
+  appid: wx1a3725c487de09ae
+  secret: e45302712ff6f8d73729bd09a8ba583d
 
 logging:
   level:

@@ -1,5 +1,7 @@
 package com.hl.vuewe.utils;
 
+import java.security.MessageDigest;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -31,6 +33,22 @@ public class HlUtil {
         p = Pattern.compile(regEx1);
         m = p.matcher(string);
         return m.matches();
+    }
+    public static String SHA1(String decript) throws Exception {
+        MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+        crypt.reset();
+        crypt.update(decript.getBytes("UTF-8"));
+       return byteToHex(crypt.digest());
+    }
+    private static String byteToHex(final byte[] hash) {
+        Formatter formatter = new Formatter();
+        for (byte b : hash)
+        {
+            formatter.format("%02x", b);
+        }
+        String result = formatter.toString();
+        formatter.close();
+        return result;
     }
 
 }
