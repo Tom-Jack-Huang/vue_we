@@ -1,6 +1,5 @@
 package com.hl.vuewe.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.hl.vuewe.entity.UserInfo;
 import com.hl.vuewe.service.UserInfoService;
 import com.hl.vuewe.utils.HlUtil;
@@ -110,5 +109,7 @@ public class UserInfoController {
         userInfoService.insert(userInfo);
         return resultMap;
     }
+
+
 
 }
